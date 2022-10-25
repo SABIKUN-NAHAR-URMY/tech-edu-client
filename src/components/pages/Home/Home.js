@@ -5,7 +5,7 @@ import homeImg2 from '../../images/home2.jpg';
 const Home = () => {
     return (
         <div>
-            <section className='block md:grid grid-cols-2 border-2 rounded-lg m-20 p-8'>
+            <section className='block lg:grid grid-cols-2 border-2 rounded-lg m-20 p-8'>
                 <div>
                     <img className='border-2 rounded-2xl' src={homeImg} alt="" />
                 </div>
@@ -19,7 +19,7 @@ const Home = () => {
                 </div>
             </section>
 
-            <section className='block md:grid grid-cols-2 border-2 rounded-lg m-20 p-8'>
+            <section className='block lg:grid grid-cols-2 border-2 rounded-lg m-20 p-8'>
                 
                 <div className='p-10'>
                     <h2 className='text-4xl font-bold'>We will help you learn what you are passionates about</h2>
