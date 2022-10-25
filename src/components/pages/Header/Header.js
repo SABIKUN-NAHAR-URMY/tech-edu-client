@@ -5,7 +5,7 @@ import logo from '../../images/logo.png';
 const Header = () => {
    
     return (
-        <div className="navbar bg-base-100 font-bold">
+        <div className="navbar bg-base-100 font-bold text-stone-600 text-xl">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -25,8 +25,8 @@ const Header = () => {
                         <li><Link to='/register'>Register</Link></li>
                     </ul>
                 </div>
-                <img className='w-36 h-12' src={logo} alt="" />
-                <Link className="btn btn-ghost normal-case text-xl" to='/'>TechEdu</Link>
+                <img className='w-16' src={logo} alt="" />
+                <Link className="btn btn-ghost normal-case text-stone-600 font-bold text-3xl" to='/'>TechEdu</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
