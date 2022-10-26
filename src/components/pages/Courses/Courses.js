@@ -3,23 +3,22 @@ import { Link, useLoaderData } from 'react-router-dom';
 import CourseCard from './CourseCard/CourseCard';
 
 const Courses = () => {
-    const allCourses = useLoaderData();
+    const courses = useLoaderData();
     return (
-        <div className=' block md:grid grid-cols-12 gap-4'>
-            <div className='col-span-6 border-2'>
-                <h1>this is details</h1>
-                <h1>this is details</h1>
-                <h1>this is details</h1>
-                <h1>this is details</h1>
-                <h1>this is details</h1>
-                <h1>this is details</h1>
-                <h1>this is details</h1>
+        <div className=' block md:grid grid-cols-12 gap-4 m-5'>
+            <div className='col-span-3 border-2 rounded-lg'>
+                {
+                    courses.map(course => <p className='border-2 p-6 m-6'
+                        key={course.id}>
+                            <Link className='link link-neutral' to=''>{course.name}</Link>
+                        </p>)
+                }
             </div>
-            <div className='col-span-6 border-2'>
-                <h2 className='text-2xl font-bold text-center'>All courses: {allCourses.length}</h2>
+            <div className='col-span-9 border-2 rounded-lg'>
+                <h2 className='text-4xl font-bold text-center'>All Courses: {courses.length}</h2>
                 <div className='block md:grid grid-cols-2'>
                     {
-                        allCourses.map(course => <CourseCard
+                        courses.map(course => <CourseCard
                             key={course.id}
                             course={course}></CourseCard>)
                     }

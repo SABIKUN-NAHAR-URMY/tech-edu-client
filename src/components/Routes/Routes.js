@@ -2,6 +2,7 @@ import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import Blog from '../pages/Blog/Blog';
 import Courses from '../pages/Courses/Courses';
+import CoursesDetails from '../pages/Courses/CoursesDetails/CoursesDetails';
 import FAQ from '../pages/FAQ/FAQ';
 import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
@@ -20,7 +21,7 @@ export const routes = createBrowserRouter([
             {
                 path:'/courses',
                 element: <Courses></Courses>,
-                loader: () => fetch('http://localhost:5000/all-courses')
+                loader: () => fetch('http://localhost:5000/courses')
             },
             {
                 path: '/faq',
