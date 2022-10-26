@@ -2,8 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import loginImg from '../../images/login.png';
 import { FaGoogle } from "react-icons/fa";
+import { GoogleAuthProvider } from "firebase/auth";
+import { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+
+const provider = new GoogleAuthProvider();
 
 const Login = () => {
+    const { providerLogin } = useContext(AuthContext);
+
+    const handelLogin = () => {
+        providerLogin(provider)
+        .then(result => {
+            const user = result.user;
+            console.log(user);
+        })
+        .catch(error => console.error(error))
+    }
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row-reverse">
@@ -33,7 +48,7 @@ const Login = () => {
                         </div>
                     </form>
                     <div className="divider px-8">OR</div>
-                <button className="btn btn-outline my-6 mx-8"><FaGoogle className='mr-2'></FaGoogle>Continue with Google</button>
+                    <button onClick={handelLogin} className="btn btn-outline my-6 mx-8"><FaGoogle className='mr-2'></FaGoogle>Continue with Google</button>
                 </div>
             </div>
         </div>
