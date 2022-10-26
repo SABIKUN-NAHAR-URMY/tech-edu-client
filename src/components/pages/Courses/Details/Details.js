@@ -10,8 +10,8 @@ const Details = ({ d }) => {
             <h2 className='text-4xl font-bold text-center'>{name}</h2>
             <div className=''>
                 {
-                    courses.map((c,idx) => <DetailsOverall
-                    key={idx}
+                    courses.map((c) => <DetailsOverall
+                    key={c.courseId}
                     c = {c}></DetailsOverall>)
                 }
             </div>

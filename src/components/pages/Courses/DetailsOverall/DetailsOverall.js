@@ -1,15 +1,21 @@
 import React from 'react';
 import { FaFileDownload, FaStar, FaEye } from "react-icons/fa";
 import Pdf from "react-to-pdf";
+import { FaChessKing } from "react-icons/fa";
+import { Link } from 'react-router-dom';
+import CheckOut from '../CheckOut/CheckOut';
 
 
 const ref = React.createRef();
 
 const DetailsOverall = ({ c }) => {
 
-    console.log(c);
-    const { author, details, image_url, rating, title, total_view } = c;
-
+   
+    const { courseId, author, details, image_url, rating, title, total_view } = c;
+    console.log(courseId);
+    const handelCheckOut = () =>{
+        <CheckOut></CheckOut>
+    }
 
     return (
         <div>
@@ -23,6 +29,7 @@ const DetailsOverall = ({ c }) => {
                         </div>
                         <div>
                             <p className='mb-0 text-xl'>{author.name}</p>
+                            <p>{author.price}</p>
                         </div>
                     </div>
                     <div>
@@ -39,7 +46,7 @@ const DetailsOverall = ({ c }) => {
                     <h2 className="card-title text-3xl font-bold">{title}</h2>
                     <p className='text-xl font-semibold'>{details}</p>
                     <div className="card-actions justify-end">
-                        <button className="btn px-20">Enroll</button>
+                    <Link to={`/coursesDetails/${courseId}`}><button onClick={handelCheckOut} className="btn px-20"><FaChessKing className='text-warning mr-4'></FaChessKing>Get Premium Access</button></Link>
                     </div>
                 </div>
                 <div className='card-footer border-2 rounded-lg flex justify-between p-6'>
