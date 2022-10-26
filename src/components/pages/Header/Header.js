@@ -3,9 +3,11 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import logo from '../../images/logo.png';
+import { FaUserAlt } from "react-icons/fa";
 
 const Header = () => {
-    const { user, photourl, logOut } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
+    console.log(user);
 
     const handelLogOut = () => {
         logOut()
@@ -53,9 +55,9 @@ const Header = () => {
             </div>
             <div className="navbar-end">
                 {
-                    photourl?.photoURL ?
+                    user?.photoURL ?
                         <>
-                            <img className='w-10 h-10 rounded-full mr-4' src={photourl.photoURL} alt="" />
+                            <img className='w-10 h-10 rounded-full mr-4' src={user.photoURL ? user.photoURL : <FaUserAlt></FaUserAlt>} alt="" />
                             <button onClick={handelLogOut}>Logout</button>
                         </>
                         :

@@ -9,7 +9,21 @@ import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 const provider = new GoogleAuthProvider();
 
 const Login = () => {
-    const { providerLogin } = useContext(AuthContext);
+    const { providerLogin, signIn } = useContext(AuthContext);
+
+    const handelLoginForm = (event) =>{
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        signIn(email, password)
+        .then(result => {
+            const user = result.user;
+            form.reset('');
+        })
+        .catch(error => console.error(error))
+    }
 
     const handelLogin = () => {
         providerLogin(provider)
@@ -26,19 +40,19 @@ const Login = () => {
                     <img src={loginImg} alt="" />
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                    <form className="card-body">
+                    <form onSubmit={handelLoginForm} className="card-body">
                         <h1 className="text-5xl font-bold pb-5">Login now!</h1>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input name='email' type="text" placeholder="email" className="input input-bordered" />
+                            <input name='email' type="text" placeholder="email" className="input input-bordered" required/>
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input name='password' type="password" placeholder="password" className="input input-bordered" />
+                            <input name='password' type="password" placeholder="password" className="input input-bordered" required/>
                             <label className="label pt-5">
                                 <p>Don't have an account? <Link className="link link-neutral" to='/register'> Register</Link></p>
                             </label>
