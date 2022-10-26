@@ -8,7 +8,7 @@ const Details = ({ d }) => {
     return (
         <div>
             <h2 className='text-4xl font-bold text-center'>{name}</h2>
-            <div>
+            <div className=''>
                 {
                     courses.map((c,idx) => <DetailsOverall
                     key={idx}
