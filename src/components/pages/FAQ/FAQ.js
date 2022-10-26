@@ -2,7 +2,7 @@ import React from 'react';
 
 const FAQ = () => {
     return (
-        <div className='w-[80%] h-96 mx-auto'>
+        <div className='w-[80%] mx-auto m-5'>
             <div className="collapse w-full rounded-lg">
                 <input type="checkbox" className="peer" />
                 <div className="collapse-title bg-slate-700 text-primary-content peer-checked:bg-slate-600 peer-checked:text-secondary-content border-y text-2xl">
