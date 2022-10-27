@@ -74,8 +74,15 @@ const Header = () => {
                 {
                     user?.uid ?
                         <>
-                            <span>{user?.displayName}</span>
-                            <button onClick={handelLogOut} className='px-2'>LogOut</button>
+                            {
+                                user?.photoURL ?
+                                    <>
+                                        <span className='tooltip tooltip-bottom' data-tip={user?.displayName}><img className="rounded-full h-10" src={user.photoURL} alt="" /></span>
+                                        <button onClick={handelLogOut} className='px-2'>LogOut</button>
+                                    </>
+                                    :
+                                    <FaUserAlt></FaUserAlt>
+                            }
                         </>
                         :
                         <>
@@ -83,16 +90,6 @@ const Header = () => {
                             <Link className='mr-4' to='/register'>Register</Link>
                         </>
                 }
-
-
-                <Link className='mr-4' to=''>
-                    {
-                        user?.photoURL ?
-                            <img className='rounded-full h-10' src={user.photoURL} alt="" />
-                            :
-                            <FaUserAlt></FaUserAlt>
-                    }
-                </Link>
 
 
                 <label className="swap swap-rotate">
