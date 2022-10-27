@@ -3,6 +3,8 @@
 2. Using firebase 
 3. Using react router, react icons
 4. Server side courses.json file created by me
+5. Protected route uses here
+
 # I try my best to create Learning Website named Tech-Edu
 
 # Github repository link client side and server side are following: 
