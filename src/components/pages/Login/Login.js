@@ -1,36 +1,58 @@
 import React, { useState } from 'react';
 import { Form, Link, useLocation, useNavigate } from 'react-router-dom';
 import loginImg from '../../images/login.png';
-import { FaGoogle } from "react-icons/fa";
+import { FaGoogle, FaGithub } from "react-icons/fa";
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
+    const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
 
     const [error, setError] = useState('');
-    const {signIn} = useContext(AuthContext);
+
+    const { signIn, providerLogin } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
     const from = location.state?.from?.pathname || '/';
 
-    const handelLogIn = (event) =>{
+    const handelLogIn = (event) => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        
+
         signIn(email, password)
-        .then(result => {
-            const user = result.user;
-            form.reset();
-            setError('');
-            navigate(from, {replace: true});
-        })
-        .catch(error => {
-            console.error(error);
-            setError(error.message);
-        })
+            .then(result => {
+                const user = result.user;
+                form.reset();
+                setError('');
+                navigate(from, { replace: true });
+            })
+            .catch(error => {
+                console.error(error);
+                setError(error.message);
+            })
+    }
+
+    const handelGoogleSignIn = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.error(error))
+    }
+
+    const handelGithubSignIn = () => {
+        providerLogin(githubProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.error(error))
     }
 
     return (
@@ -66,7 +88,8 @@ const Login = () => {
                         </div>
                     </Form>
                     <div className="divider px-8">OR</div>
-                    <button className="btn btn-outline my-6 mx-8"><FaGoogle className='mr-2'></FaGoogle>Continue with Google</button>
+                    <button onClick={handelGoogleSignIn} className="btn btn-outline my-6 mx-8"><FaGoogle className='mr-2'></FaGoogle>Continue with Google</button>
+                    <button onClick={handelGithubSignIn} className="btn btn-outline my-6 mx-8"><FaGithub className='mr-2'></FaGithub>Continue with GitHub</button>
                 </div>
             </div>
         </div>

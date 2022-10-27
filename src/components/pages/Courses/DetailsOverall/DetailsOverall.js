@@ -9,8 +9,7 @@ import CheckOut from '../CheckOut/CheckOut';
 const ref = React.createRef();
 
 const DetailsOverall = ({ c }) => {
-
-   
+    
     const { courseId, author, details, image_url, rating, title, total_view } = c;
     const handelCheckOut = () =>{
         <CheckOut></CheckOut>

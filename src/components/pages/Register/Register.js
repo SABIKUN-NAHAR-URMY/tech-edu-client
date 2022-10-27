@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Form, Link } from 'react-router-dom';
 import registerImg from '../../images/register.png';
-import { FaGoogle } from "react-icons/fa";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 
 const Register = () => {
 
@@ -13,6 +13,7 @@ const Register = () => {
     const { providerLogin, createUser, modernizeProfile } = useContext(AuthContext);
 
     const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
 
 
     const handelRegister = (event) => {
@@ -57,6 +58,14 @@ const Register = () => {
             .catch(error => console.error(error))
     }
 
+    const handelGithubSignIn = () => {
+        providerLogin(githubProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.error(error))
+    }
 
 
     return (
@@ -105,6 +114,7 @@ const Register = () => {
                     </Form>
                     <div className="divider px-8">OR</div>
                     <button onClick={handelGoogleSignIn} className="btn btn-outline my-6 mx-8"><FaGoogle className='mr-2'></FaGoogle>Continue with Google</button>
+                    <button onClick={handelGithubSignIn} className="btn btn-outline my-6 mx-8"><FaGithub className='mr-2'></FaGithub>Continue with GitHub</button>
                 </div>
             </div>
         </div>
