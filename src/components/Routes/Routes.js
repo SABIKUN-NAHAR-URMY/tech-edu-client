@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import Blog from '../pages/Blog/Blog';
+import CheckOut from '../pages/Courses/CheckOut/CheckOut';
 import Courses from '../pages/Courses/Courses';
 import CoursesDetails from '../pages/Courses/CoursesDetails/CoursesDetails';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
@@ -9,6 +10,7 @@ import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
 import Main from '../pages/Main/Main';
 import Register from '../pages/Register/Register';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
 
 export const routes = createBrowserRouter([
     {
@@ -30,6 +32,12 @@ export const routes = createBrowserRouter([
                 element: <CoursesDetails></CoursesDetails>,
                 loader: ({params}) => fetch(`https://tech-edu-server-sabikun-nahar-urmy.vercel.app/courses/${params.id}`)
             },
+            {
+                path:'/checkOut/:id',
+                element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>,
+                loader: ({params}) => fetch(`http://localhost:5000/courses/${params.id}`)
+            },
+            
             {
                 path: '/faq',
                 element: <FAQ></FAQ>
