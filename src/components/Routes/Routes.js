@@ -23,12 +23,12 @@ export const routes = createBrowserRouter([
             {
                 path:'/courses',
                 element: <Courses></Courses>,
-                loader: () => fetch('http://localhost:5000/courses')
+                loader: () => fetch('https://tech-edu-server-sabikun-nahar-urmy.vercel.app/courses')
             },
             {
                 path:'/coursesDetails/:id',
                 element: <CoursesDetails></CoursesDetails>,
-                loader: ({params}) => fetch(`http://localhost:5000/courses/${params.id}`)
+                loader: ({params}) => fetch(`https://tech-edu-server-sabikun-nahar-urmy.vercel.app/courses/${params.id}`)
             },
             {
                 path: '/faq',

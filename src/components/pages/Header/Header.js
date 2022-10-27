@@ -1,38 +1,39 @@
 import React from 'react';
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import logo from '../../images/logo.png';
 import { FaUserAlt } from "react-icons/fa";
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { FaToggleOff, FaToggleOn } from "react-icons/fa";
+import { FaToggleOff } from "react-icons/fa";
+import { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Header = () => {
+
     const { user, logOut } = useContext(AuthContext);
+
+    const handelLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.error(error))
+    }
 
     const [theme, setTheme] = useState('light-theme');
 
     const toggleTheme = () => {
-        if(theme === 'dark-theme'){
+        if (theme === 'dark-theme') {
             setTheme('light-theme');
         }
-        else{
+        else {
             setTheme('dark-theme')
         }
     }
 
     useEffect(() => {
         document.body.className = theme;
-    },[theme])
+    }, [theme])
 
-    const handelLogOut = () => {
-        logOut()
-            .then(result => {
-                const user = result.user;
-            })
-            .catch(error => console.error(error))
-    }
+
 
     return (
         <div className="navbar bg-base-100 font-bold text-stone-600 text-xl">
@@ -47,11 +48,9 @@ const Header = () => {
                             <Link className="justify-between" to='/courses'>
                                 Courses
                             </Link>
-
                         </li>
                         <li><Link to='/faq'>FAQ</Link></li>
                         <li><Link to='/blog'>Blog</Link></li>
-
                     </ul>
                 </div>
                 <img className='w-16' src={logo} alt="" />
@@ -71,22 +70,36 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                {
-                    user?.photoURL ?
-                        <>
-                            <img className='w-10 h-10 rounded-full mr-4' src={user.photoURL ? user.photoURL : <FaUserAlt></FaUserAlt>} alt="" />
-                            <button onClick={handelLogOut}>Logout</button>
-                        </>
-                        :
-                        <>
-                            <Link className='mr-4' to='/login'>Login</Link>
-                            <Link className='mr-4' to='/register'>Register</Link>
-                        </>
-                }
+
+                <Link className='mr-4' to=''>
+                    {
+                        user?.uid ?
+                            <>
+                                <span>{user?.displayName}</span>
+                                <button onClick={handelLogOut} className='px-2'>LogOut</button>
+                            </>
+                            :
+                            <>
+                                <Link className='mr-4' to='/login'>Login</Link>
+                                <Link className='mr-4' to='/register'>Register</Link>
+                            </>
+                    }
+
+                </Link>
+                <Link className='mr-4' to=''>
+                    {
+                        user?.photoURL ?
+                            <img className='rounded-full h-10' src={user.photoURL} alt="" />
+                            :
+                            <FaUserAlt></FaUserAlt>
+                    }
+                </Link>
+
+
                 <label className="swap swap-rotate">
 
                     <button onClick={() => toggleTheme()}><FaToggleOff></FaToggleOff></button>
-                     
+
                 </label>
             </div>
         </div>
