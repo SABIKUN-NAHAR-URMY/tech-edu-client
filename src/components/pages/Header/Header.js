@@ -71,21 +71,20 @@ const Header = () => {
             </div>
             <div className="navbar-end">
 
-                <Link className='mr-4' to=''>
-                    {
-                        user?.uid ?
-                            <>
-                                <span>{user?.displayName}</span>
-                                <button onClick={handelLogOut} className='px-2'>LogOut</button>
-                            </>
-                            :
-                            <>
-                                <Link className='mr-4' to='/login'>Login</Link>
-                                <Link className='mr-4' to='/register'>Register</Link>
-                            </>
-                    }
+                {
+                    user?.uid ?
+                        <>
+                            <span>{user?.displayName}</span>
+                            <button onClick={handelLogOut} className='px-2'>LogOut</button>
+                        </>
+                        :
+                        <>
+                            <Link className='mr-4' to='/login'>Login</Link>
+                            <Link className='mr-4' to='/register'>Register</Link>
+                        </>
+                }
 
-                </Link>
+
                 <Link className='mr-4' to=''>
                     {
                         user?.photoURL ?
