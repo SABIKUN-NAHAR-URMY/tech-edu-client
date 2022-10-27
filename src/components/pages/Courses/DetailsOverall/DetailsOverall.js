@@ -24,7 +24,7 @@ const DetailsOverall = ({ c }) => {
                         </div>
                     </div>
                     <div>
-                        <Pdf targetRef={ref} filename="code-example.pdf">
+                        <Pdf targetRef={ref} filename="Courses.pdf">
                             {({ toPdf }) => <button onClick={toPdf}><FaFileDownload></FaFileDownload></button>}
                         </Pdf>
 

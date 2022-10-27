@@ -2,7 +2,7 @@ import React from 'react';
 
 const CheckOutDetails = ({ ci }) => {
     console.log(ci);
-    const { name, courses } = ci;
+    const {id, name, courses } = ci;
     return (
         <div>
             <div className='text-2xl font-bold text-center bg-slate-800 p-8 text-slate-50'>{name}</div>

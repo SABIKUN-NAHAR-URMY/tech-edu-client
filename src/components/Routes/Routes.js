@@ -25,17 +25,17 @@ export const routes = createBrowserRouter([
             {
                 path:'/courses',
                 element: <Courses></Courses>,
-                loader: () => fetch('https://tech-edu-server-sabikun-nahar-urmy.vercel.app/courses')
+                loader: () => fetch('https://tech-edu-server-psi.vercel.app/courses')
             },
             {
                 path:'/coursesDetails/:id',
                 element: <CoursesDetails></CoursesDetails>,
-                loader: ({params}) => fetch(`https://tech-edu-server-sabikun-nahar-urmy.vercel.app/courses/${params.id}`)
+                loader: ({params}) => fetch(`https://tech-edu-server-psi.vercel.app/courses/${params.id}`)
             },
             {
                 path:'/checkOut/:id',
                 element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/courses/${params.id}`)
+                loader: ({params}) => fetch(`https://tech-edu-server-psi.vercel.app/courses/${params.id}`)
             },
             
             {
