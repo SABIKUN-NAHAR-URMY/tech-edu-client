@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Link } from 'react-router-dom';
 import registerImg from '../../images/register.png';
 import { FaGoogle } from "react-icons/fa";
@@ -8,12 +8,14 @@ import { GoogleAuthProvider } from 'firebase/auth';
 
 const Register = () => {
 
-    const {providerLogin, createUser} = useContext(AuthContext);
+    const [error, setError] = useState('');
+
+    const { providerLogin, createUser, modernizeProfile } = useContext(AuthContext);
 
     const googleProvider = new GoogleAuthProvider();
 
 
-    const handelRegister = (event) =>{
+    const handelRegister = (event) => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
@@ -22,20 +24,37 @@ const Register = () => {
         const password = form.password.value;
 
         createUser(email, password)
-        .then(result => {
-            const user = result.user;
-            form.reset();
-        })
-        .catch(error => console.error(error))
+            .then(result => {
+                const user = result.user;
+                setError('');
+                form.reset();
+                handelModernizeProfile(name, photoURL);
+            })
+            .catch(error => {
+                console.error(error);
+                setError(error.message);
+            })
     }
 
-    const handelGoogleSignIn = () =>{
-        providerLogin(googleProvider)
-        .then(result => {
-            const user = result.user;
-            console.log(user);
-        })
+    const handelModernizeProfile = (name, photoURL) =>{
+
+        const profile = {
+            displayName: name,
+            photoURL: photoURL
+        }
+        modernizeProfile(profile)
+        .then(() => {})
         .catch(error => console.error(error))
+
+    }
+
+    const handelGoogleSignIn = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.error(error))
     }
 
 
@@ -65,13 +84,13 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input name="email" type="text" placeholder="email" className="input input-bordered" required/>
+                            <input name="email" type="text" placeholder="email" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input name="password" type="password" placeholder="password" className="input input-bordered" required/>
+                            <input name="password" type="password" placeholder="password" className="input input-bordered" required />
 
                             <label className="label pt-5">
                                 <p>Already have an account?? <Link className="link link-neutral" to='/login'> Login</Link></p>
@@ -79,6 +98,9 @@ const Register = () => {
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn">Register</button>
+                        </div>
+                        <div className="text-red-700">
+                            {error}
                         </div>
                     </Form>
                     <div className="divider px-8">OR</div>

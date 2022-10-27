@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Link, useNavigate } from 'react-router-dom';
+import { Form, Link, useLocation, useNavigate } from 'react-router-dom';
 import loginImg from '../../images/login.png';
 import { FaGoogle } from "react-icons/fa";
 import { useContext } from 'react';
@@ -7,9 +7,12 @@ import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Login = () => {
 
+    const [error, setError] = useState('');
     const {signIn} = useContext(AuthContext);
-
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
 
     const handelLogIn = (event) =>{
         event.preventDefault();
@@ -21,9 +24,13 @@ const Login = () => {
         .then(result => {
             const user = result.user;
             form.reset();
-            navigate('/');
+            setError('');
+            navigate(from, {replace: true});
         })
-        .catch(error => console.error(error))
+        .catch(error => {
+            console.error(error);
+            setError(error.message);
+        })
     }
 
     return (
@@ -54,8 +61,8 @@ const Login = () => {
                         <div className="form-control mt-6">
                             <button className="btn">Login</button>
                         </div>
-                        <div className="text-danger">
-                            <p>hi</p>
+                        <div className="text-red-700">
+                            {error}
                         </div>
                     </Form>
                     <div className="divider px-8">OR</div>
